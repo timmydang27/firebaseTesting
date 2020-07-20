@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title >Firebase Testing</title>
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  
+  </head>
+  <body>
+     <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -13,20 +16,21 @@
 
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+<script src="/__/firebase/init.js"></script>
+<script src="script.js"></script>
 
-
-
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  
-  </head>
-  <body>
-      <div class="container">
-          <input id="txtEmail" type="email" placeholder="Email">
-          <input id="txtPassword" type="password" placeholder="Password">
-          <button id="btnLogin" class="btn btn-action">Log In</button>
-          <button id="btnSignUp" class="btn btn-secondary">Sign Up</button>
-          <button id="btnLogout" class="btn btn-action hide">Log Out</button>
+      <div class="flex-container">
+        <label for="email">Email</label>
+        <input id="email"></input>
+        <label for="password">Password</label>
+        <input id="password"></input>
+        <button id="login" onclick="logIn()">Login</button>
+        <button id="signUp" onclick="signUp()">Sign Up</button>
+        <button id="signOut" onclick="signOut()">Sign Out</button>
+        <input id="name"></input>
+        <button id="data" onclick="runUserData()">Set Name</button>
       </div>
-      <script src="script.js"></script>
+ 
   </body>
   </html>
