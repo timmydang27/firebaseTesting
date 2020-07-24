@@ -125,7 +125,7 @@ function initApp(){
 
 
 function userData() {
-  const nameofUser = userData(document.getElementById("name").value);
+  const nameofUser = document.getElementById("name").value;
   database.ref("user/").child(userId).set({name: nameofUser});
   database.ref("user/").on("value", snap => {
     console.log(snap.val())
