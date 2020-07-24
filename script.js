@@ -15,6 +15,7 @@ auth.onAuthStateChanged(firebaseUser =>{});
 
 var username;
 var isAUser;
+var theName = "Null";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -83,6 +84,12 @@ function signOut(){
     .catch(e => console.log(e.message));
   
 }
+
+function getUsername(){
+  theName = document.getElementById("name").value;
+  initApp();
+}
+
 //Add a realtime event listener
 function initApp(){
   // declare auth
@@ -113,7 +120,7 @@ function initApp(){
       
       //second user print
       console.log(user);  
-      
+      userData(user.uid, theName);
      
     }
     else{
@@ -124,11 +131,11 @@ function initApp(){
 }
 
 
-function userData() {
-  const nameofUser = document.getElementById("name").value;
-  database.ref("user/").child(userId).set({name: nameofUser});
-  database.ref("user/").on("value", snap => {
-    console.log(snap.val())
+function userData(userId, nameOfUser) {
+  console.log(userId);
+  database.ref("user/" + userId).set({name: nameOfUser});
+  database.ref("user/" + userId).child("name").on("value", snap => {
+    console.log("database username: " + snap.val());
   });
 }
 
