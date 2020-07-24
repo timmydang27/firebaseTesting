@@ -123,14 +123,12 @@ function initApp(){
   });
 }
 
-function runUserDate(){
-  const nameofUser = userData(document.getElementById("name").value);
-  console.log(nameOfUser);
-}
 
-function userData(name) {
-  firebase.database().ref('users/' + userId).set({
-    firstName: name
+function userData() {
+  const nameofUser = userData(document.getElementById("name").value);
+  database.ref("user/").child(userId).set({name: nameofUser});
+  database.ref("user/").on("value", snap => {
+    console.log(snap.val())
   });
 }
 
