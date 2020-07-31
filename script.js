@@ -170,7 +170,6 @@ function userData(userId, nameOfUser) {
   console.log(userId);
   firebase.database().ref("user/" + userId).set({
     name: nameOfUser,
-    interests: "empty"
 });
 database.ref("user/" + userId).child("name").on("value", snap => {
   console.log("database username: " + snap.val());
