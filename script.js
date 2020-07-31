@@ -129,9 +129,11 @@ function initApp(){
       isAUser = false;
       console.log("not logged");
     }
-    if (interestArray!=null) {
+    console.log(interestArray);
+    if (interestArray !== null) {
       writeUserInterest(user.uid, interestArray);
       interestArray = [];
+     console.log("hello");
   }
   });
 }
@@ -140,6 +142,7 @@ function initApp(){
 function setInterest(){
   interestList = document.getElementById("interest").value;
   interestArray = seperateInterests(interestList);
+  console.log(interestArray);
   initApp();
 }
 
@@ -163,13 +166,13 @@ function setInterest(){
 
   function writeUserInterest(userId, interests){
     for (var i = 0 ; i < interests.length;i++) {
-        firebase.database().ref("user/" + userId +"/interests").push(interests[i]);
+        firebase.database().ref("users/" + userId +"/interests").push(interests[i]);
     }
 }
 function userData(userId, nameOfUser) {
   console.log(userId);
   firebase.database().ref("user/" + userId).set({
-    name: nameOfUser,
+    name: nameOfUser
 });
 database.ref("user/" + userId).child("name").on("value", snap => {
   console.log("database username: " + snap.val());
