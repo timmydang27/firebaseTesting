@@ -16,6 +16,8 @@ auth.onAuthStateChanged(firebaseUser =>{});
 var username;
 var isAUser;
 var theName = "Null";
+let interestArray;
+
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -127,16 +129,50 @@ function initApp(){
       isAUser = false;
       console.log("not logged");
     }
+    if (interestArray!=null) {
+      writeUserInterest(user.uid, interestArray);
+      interestArray = [];
+  }
   });
 }
 
 
+function setInterest(){
+  interestList = document.getElementById("interest").value;
+  interestArray = seperateInterests(interestList);
+  initApp();
+}
+
+
+  function seperateInterests(interestList){
+    var start = 0;
+    var end;
+    var interestArray = [];
+    for(var i = 0; i < interestList.length; i++){
+      if(interestList.substring(i, i+1)===","){
+        end = i;
+        interestArray.push(interestList.substring(start, end));
+        start = end+1;
+      }
+      if(i == interestList.length - 1){
+        interestArray.push(interestList.substring(start, i+1));
+      }
+    }
+    return interestArray;
+  }
+
+  function writeUserInterest(userId, interests){
+    for (var i = 0 ; i < interests.length;i++) {
+        firebase.database().ref("user/" + userId +"/interests").push(interests[i]);
+    }
+}
 function userData(userId, nameOfUser) {
   console.log(userId);
-  database.ref("user/" + userId).set({name: nameOfUser});
-  database.ref("user/" + userId).child("name").on("value", snap => {
-    console.log("database username: " + snap.val());
-  });
+  firebase.database().ref("user/" + userId).set({
+    name: nameOfUser,
+    interests: "empty"
+});
+database.ref("user/" + userId).child("name").on("value", snap => {
+  console.log("database username: " + snap.val());
+});
 }
-
-
